@@ -1,0 +1,19 @@
+---
+title: "MaMoD Course 1 Quiz 1 Analysis"
+author: "Lema"
+date: "2023-11-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+## Data
+```{r}
+quiz1 <- import("")
+```
+
