@@ -1,0 +1,100 @@
+---
+title: "Scrape Bible"
+author: "Dr. Lema Logamou Seknewna & Sakayo Toadoum Sari"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Required packages
+```{r warning=FALSE, message=FALSE}
+library(tictoc)
+source("./functions/functions_and_data.R")
+```
+
+
+```{r}
+bible = "BIRD"
+bible_num = 387
+
+translation <- "NIV"
+bible_tr_num <- 111
+```
+
+
+# TWI ASW
+```{r}
+tic()
+if (file.exists("TWI.xlsx")){
+  TWI <- rio::import("TWI.xlsx")
+} else {
+  TWI <- get_verses("ASW", 1861)
+}
+toc()
+```
+
+
+```{r}
+# text %>% head()
+```
+
+
+```{r}
+# p <- "^[0-9]\\s*"
+# text2 <- text[grepl(p, text)] |> unique()
+# 
+# p2 <- "^[0-9]{1,3}\\s*#|^[0-9]{1,3}[a-zA-Z\u0080-\uFFFF]"
+# text3 <- text[grepl(p2, text)] |> unique()
+```
+
+
+```{r}
+# # text[grepl("^[0-9]\\s*\\#|^[0-9]{1,3}[\u0080-\uFFFFA-Za-z()“‘]+", text)]
+# p <- "^[\u0080-\uFFFFA-Za-z()“‘]"
+# text2 <- text[grepl(p, text)] |> unique()
+# 
+# text3 <- lapply(text2, function(x){
+#   xx <- text[grepl(x, text)]
+#   ifelse(sum() == 2, x, NULL)
+# })
+```
+
+
+```{r}
+# text
+```
+
+## Process the french version
+```{r}
+# get_all_bible <- get_verses(bible, bible_num)
+# get_all_bible_tr <- get_verses(translation, bible_tr_num)
+tic()
+if (file.exists("BMS.xlsx")){
+  mussey <- rio::import("BMS.xlsx")
+} else {
+  mussey <- get_verses("BMS", 111)
+}
+toc()
+```
+
+
+```{r}
+tic()
+if (file.exists("NIV.xlsx")){
+  NIV_version <- rio::import("NIV.xlsx")
+} else {
+  NIV_version <- get_verses("NIV", 111)
+}
+toc()
+```
+
+
+## Merging data
+```{r}
+twi_eng <- merge_data(x = TWI, y = NIV_version, x_name = "TWI", y_name = "NIV")
+View(twi_eng)
+```
