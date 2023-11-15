@@ -26,6 +26,21 @@ bible_tr_num <- 111
 ```
 
 
+# Hausa language
+```{r}
+bible <- "SRK"
+bible_num <- 1614
+
+tic()
+if (file.exists(paste0(bible, ".xlsx"))){
+  bible_text <- rio::import(paste0(bible, ".xlsx"))
+} else {
+  bible_text <- get_verses(bible, bible_num)
+}
+toc()
+```
+
+
 # TWI ASW
 ```{r}
 tic()
@@ -95,6 +110,6 @@ toc()
 
 ## Merging data
 ```{r}
-twi_eng <- merge_data(x = TWI, y = NIV_version, x_name = "TWI", y_name = "NIV")
-View(twi_eng)
+bible_translattion <- merge_data(x = bible_text, y = NIV_version, x_name = bible, y_name = "NIV")
+View(bible_translattion)
 ```
