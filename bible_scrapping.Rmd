@@ -18,9 +18,20 @@ source("./functions/functions_and_data.R")
 
 
 ```{r}
-bible = "BIRD"
-bible_num = 387
+bible = "ASNA"
+bible_num = 2094
 
+tic()
+if (file.exists(paste0(bible, ".xlsx"))){
+  bible_text <- rio::import(paste0(bible, ".xlsx"))
+} else {
+  bible_text <- get_verses(bible, bible_num)
+}
+toc()
+```
+
+
+```{r}
 translation <- "NIV"
 bible_tr_num <- 111
 ```
